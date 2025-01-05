@@ -20,6 +20,10 @@ public class Titulo {
         return totalDeAvaliacoes;
     }
 
+    public int getDuracaoEmMInutos() {
+        return duracaoEmMInutos;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
