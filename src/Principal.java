@@ -1,8 +1,10 @@
-import br.com.alura.screenmatch.calculo.CalculadoraDeTempo;
-import br.com.alura.screenmatch.calculo.FiltroRecomendacao;
+import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
+import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelos.Episodio;
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
+
+import java.util.ArrayList;
 
 public class Principal {
     public static void main(String[] args) {
@@ -47,5 +49,19 @@ public class Principal {
         episodio.setSerie(Friends);
         episodio.setTotalVisualizacoes(300);
         filtro.filtra(episodio);
+
+        var filmeDaAlane = new Filme();
+        filmeDaAlane.setDuracaoEmMInutos(200);
+        filmeDaAlane.setNome("Divertidamente");
+        filmeDaAlane.setAnoDeLancamento(2014);
+        filmeDaAlane.avalia(10);
+
+        ArrayList<Filme> listaFilmes = new ArrayList<>();
+        listaFilmes.add(filmeDaAlane);
+        listaFilmes.add(meuFilme);
+        listaFilmes.add(outroFilme);
+        System.out.println("Tamanho da lista de filmes: " + listaFilmes.size());
+        System.out.println("Primeiro filme: " + listaFilmes.get(0).getNome());
+        System.out.println(listaFilmes);
     }
 }
