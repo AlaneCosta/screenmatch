@@ -22,29 +22,31 @@ public class PrincipalComBusca {
         var busca = leitura.nextLine();
 
         String endereco = "http://www.omdbapi.com/?t=" + busca + "&apikey=22942d1d";
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(endereco))
-                .build();
-        HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
-
-        String json = response.body();
-        out.println(response.body());
-
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                .create();
-
-        TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
-        System.out.println(meuTituloOmdb);
         try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(endereco))
+                    .build();
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
+            String json = response.body();
+            out.println(response.body());
+
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                    .create();
+
+            TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
+            System.out.println(meuTituloOmdb);
+
             Titulo meuTitulo = new Titulo(meuTituloOmdb);
             out.println("Titulo já convertido");
             System.out.println(meuTitulo);
         } catch (NumberFormatException e) {
-            out.println(e.getMessage());
+            out.println("Aconteceu um erro: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            out.println("Algum erro de argumento na busca, verifique o endereço");
         }
 
         out.println("O programa finalizou corretamente");
